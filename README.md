@@ -5,7 +5,7 @@
     "name": "",
     "source": "",
     "pattern": "",
-    "overwrite: false,
+    "overwrite: false
 }
 ```
 ## Description
@@ -46,9 +46,9 @@ route {
     #   {"http.vars_regex.url_element.match1": "https://github.com:443/amalto"}
 
     vars_regex {
-      name url_element
-      source "https://github.com:443/amalto"
-  	  pattern "(https?:\/\/)([^:^\/]*)(:\d*[^\/])?(.*[^\/])?"
+        name url_element
+        source "https://github.com:443/amalto"
+  	    pattern "(https?:\/\/)([^:^\/]*)(:\d*[^\/])?(.*[^\/])?"
     }
 
     # Expected results:
@@ -59,9 +59,9 @@ route {
     #   {"http.vars_regex.named_url_element.match1": "https://github.com:443/amalto"}
 
     vars_regex {
-      name named_url_element
-      source "https://github.com:443/amalto"
-  	  pattern "(?P<scheme>https?:\/\/)(?P<host>[^:^\/]*)(?P<port>:\d*[^\/])?(?P<path>.*[^\/])?"
+        name named_url_element
+        source "https://github.com:443/amalto"
+  	    pattern "(?P<scheme>https?:\/\/)(?P<host>[^:^\/]*)(?P<port>:\d*[^\/])?(?P<path>.*[^\/])?"
     }
 
     # Expected results:
@@ -107,6 +107,5 @@ route {
         pattern "(\d*)?"
         overwrite false
     }
-
   }
 ```
