@@ -51,7 +51,7 @@ func parseCaddyFileVarsRegex(h httpcaddyfile.Helper) (caddyhttp.MiddlewareHandle
 		}
 	}
 	if len(vrx.Name) == 0 || len(vrx.Source) == 0 || len(vrx.Pattern) == 0 {
-		return nil, fmt.Errorf("argument count mismatch.  name, soutce and patter must be supplied")
+		return nil, fmt.Errorf("argument count mismatch.  name, source and pattern must be supplied")
 	}
 	return vrx, nil
 }

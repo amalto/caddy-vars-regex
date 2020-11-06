@@ -21,7 +21,7 @@ all:
 	@rm -rf ./bin/
 	@mkdir -p ./bin/xcaddy && cd ./bin/xcaddy && \
 	env GOARCH=amd64 GOOS=$(GO_OS) xcaddy build $(CADDY_VERSION) --output ../caddy \
-		    --with github.com/amalto/caddy-vars-regex@$(LATEST_GIT_COMMIT)=$(BUILD_DIR)
+		    --with github.com/amalto/$(PLUGIN_NAME)@$(LATEST_GIT_COMMIT)=$(BUILD_DIR)
 	@rm -rf ./bin/xcaddy
 
 linter:
