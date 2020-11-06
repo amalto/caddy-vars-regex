@@ -14,36 +14,21 @@ localhost:8443 {
     vars_regex {
       name baseurl
       source {http.request.uri.query.baseUrl}
-  	  pattern "(?P<scheme>https?:\/\/)(?P<host>[^:^\/]*)(?P<port>:\d*[^\/])?(?P<path>.*[^\/])?"
+  	  pattern "(?P<scheme>https?:\/\/)(?P<host>[^:^\/]*)(?P<colon>:)?(?P<port>\d*[^\/])?(?P<path>.*[^\/])?"
     }
 
     # Because we use placeholders as arguments to reverse_proxy you have to specify host:port
     # (i.e. it will not assume 443 for https via placeholders)
-    # So I have to force a missing port in the baseUrl to be 443 using a vars_regex trick!
-
-#    vars_regex {
-#        name port
-#        source {http.vars_regex.baseurl.port}
-#        pattern ".*"
-#    }
-#    vars_regex {
-#        name port
-#        source ":443"
-#        pattern ".*"
-#        overwrite false
-#    }
-
-    # this is a hack to allow me to add `:{port}` in the reverse_proxy call below to get around a bug
-    # where it always adds an extra `:` if the colon is specified inside the placeholder
+    # So I have to force any missing port in the baseUrl to be 443 using a vars_regex trick:
     vars_regex {
-        name port
+        name default_port
         source {http.vars_regex.baseurl.port}
-        pattern "(\d*)?"
+        pattern ".*"
     }
     vars_regex {
-        name port
-        source ":443"
-        pattern "(\d*)?"
+        name default_port
+        source "443"
+        pattern ".*"
         overwrite false
     }
 
@@ -51,8 +36,7 @@ localhost:8443 {
     rewrite {http.vars_regex.baseurl.path}{http.request.uri.path}
 
     # Proxy the request
-    reverse_proxy {http.vars_regex.baseurl.host}:{http.vars_regex.port.match2} {
-#    reverse_proxy {http.vars_regex.baseurl.host}{http.vars_regex.port.match1} {
+    reverse_proxy {http.vars_regex.baseurl.host}:{http.vars_regex.default_port.match1} {
         transport http {
           tls
         }
