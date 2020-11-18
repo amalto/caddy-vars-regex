@@ -109,3 +109,14 @@ route {
     }
   }
 ```
+
+### Build Instructions
+
+The Makefile is used for all build operations.  The file `envfile` is used for local environment customisations.
+
+Please refer to https://caddyserver.com/docs/extending-caddy for details of configuring your environment and the use of `xcaddy`.
+__________
+
+The current version of Caddy Server specified in the envfile is **2.2.1** 
+
+__________
