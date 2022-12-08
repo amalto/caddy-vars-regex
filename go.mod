@@ -1,10 +1,10 @@
 module github.com/amalto/caddy-vars-regex
 
-go 1.15
+go 1.18
 
 require (
 	github.com/Masterminds/semver/v3 v3.1.1 // indirect
-	github.com/caddyserver/caddy/v2 v2.3.0
+	github.com/caddyserver/caddy/v2 v2.6.2
 	github.com/caddyserver/xcaddy v0.1.7 // indirect
 	github.com/kyoh86/richgo v0.3.6 // indirect
 	github.com/kyoh86/xdg v1.2.0 // indirect
